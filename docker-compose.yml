@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  front:
+    image: front
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: front
+    command: gunicorn -w 1 app:app -b 0.0.0.0:5000
+    depends_on:
+      - redis
+    ports:
+      - "5000:5000"
+    restart: always
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"

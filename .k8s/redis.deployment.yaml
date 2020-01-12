@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-api
+  template:
+    metadata:
+      labels:
+        app: back-api
+    spec:
+      containers:
+        - name: back-api
+          image: redis
+          ports:
+            - containerPort: 6379
+              name: redis

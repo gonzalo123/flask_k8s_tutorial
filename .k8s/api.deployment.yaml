@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-api
+spec:
+  # How many copies of each pod do we want?
+  replicas: 1
+
+  selector:
+    matchLabels:
+      # This must match the labels we set on the pod!
+      app: front-api
+
+  # This template field is a regular pod configuration
+  # nested inside the deployment spec
+  template:
+    metadata:
+      # Set labels on the pod.
+      # This is used in the deployment selector.
+      labels:
+        app: front-api
+    spec:
+      containers:
+        - name: front-api
+          image: front:latest
+          args: ["gunicorn", "-w 1", "app:app", "-b 0.0.0.0:5000"]
+          ports:
+            - containerPort: 5000
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: api-config
+                  key: redis.host
+

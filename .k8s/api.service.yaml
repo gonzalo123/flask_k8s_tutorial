@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-api
+spec:
+  # types:
+  # - ClusterIP: (default) only accessible from within the Kubernetes cluster
+  # - NodePort: accessible on a static port on each Node in the cluster
+  # - LoadBalancer: accessible externally through a cloud provider's load balancer
+  type: LoadBalancer
+  # When the node receives a request on the static port (30163)
+  # "select pods with the label 'app' set to 'front-api'"
+  # and forward the request to one of them
+  selector:
+    app: front-api
+  ports:
+    - protocol: TCP
+      port: 5000 # port exposed internally in the cluster
+      targetPort: 5000 # the container port to send requests to
+      nodePort: 30164 # a static port assigned on each the node
+
+
