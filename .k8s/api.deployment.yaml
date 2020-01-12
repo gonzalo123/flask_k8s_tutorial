@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: front-api
-          image: front:latest
+          image: front:v1
           args: ["gunicorn", "-w 1", "app:app", "-b 0.0.0.0:5000"]
           ports:
             - containerPort: 5000
