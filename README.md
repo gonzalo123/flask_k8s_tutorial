@@ -2,6 +2,8 @@
 Supongo que tengo un redis funcionando en el puerto 6739 (docker run -p 6379:6379 redis)
 > python app.py
 
+> gunicorn -w 1 app:app -b 0.0.0.0:5000
+
 ## Arranco app con docker
 creo la imagen docker a partir del Dockerfile
 > docker build -t front .
