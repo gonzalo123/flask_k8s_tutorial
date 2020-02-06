@@ -13,10 +13,10 @@ Lo ejecuto Ejecuto
 
 No funciona. No puede acceder a Redis en localhost. Lo arranco pasándole el host donde está Redis
 
-> docker run -p 5000:5000 --env REDIS_HOST=192.168.1.76 front python app.py
+> docker run -p 5000:5000 --env REDIS_HOST=10.10.16.151 front python app.py
 
 También lo puedo arrancar con gunicorn
-> docker run -p 5000:5000 --env REDIS_HOST=192.168.1.76 front gunicorn -w 1 app:app -b 0.0.0.0:5000
+> docker run -p 5000:5000 --env REDIS_HOST=10.10.16.151 front gunicorn -w 1 app:app -b 0.0.0.0:5000
 
 ## Arranco la app con docker-compose
 
