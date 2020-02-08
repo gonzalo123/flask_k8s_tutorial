@@ -2,9 +2,7 @@
 
 I've learning how to deploy one Python application to Kubernetes. Here you can see my notes:
 
-Let's start from a dummy Python application. It's a basic Flask web API. Each time we perform a GET request to "/" we
- increase one counter and see the number of hits. The persistence layer will be a Redis database. The script is very
-  simple:
+Let's start from a dummy Python application. It's a basic Flask web API. Each time we perform a GET request to "/" we increase one counter and see the number of hits. The persistence layer will be a Redis database. The script is very simple:
 
 ```python
 from flask import Flask
@@ -27,7 +25,7 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0')
 ```
 
-First of all we create a virtual environment to ensure that we're going to install our dependencies isolately:
+First of all we create a virtual environment to ensure that we're going to install your dependencies isolatedly:
 
 > python -m venv venv
 
@@ -49,7 +47,7 @@ Now we can start our application:
 
 We open our browser with the url: http://localhost:5000 and it works.
 
-Now we're going to run our applwwication within a Docker container. First of of all we need to create one Docker image from a docker file:
+Now we're going to run our application within a Docker container. First of of all we need to create one Docker image from a docker file:
  
 ```dockerfile
 FROM python:alpine3.8
@@ -113,7 +111,11 @@ services:
       - "6379:6379"
 ```
 
-Docker compose is pretty straightfordward. But, what happens if our production environment is a cluster? docker-compose works fine in a single host. But it our production environment is a cluster, we´ll face problems (we need to esure manually things like hight avaiavility and things like that). Docker people tried to answer to this question with Docker Swarm. Basically Swarm is docker-compose within a cluster. It uses almost the same syntax than docker-compose in a single host. Looks good, ins't it? OK. Nobody uses it. Since Google created their Docker conainer orchestator (Kubernetes, aka K8s) it becames into the de-facto standard. The good thing about K8s is that it's much better than Swarm (more configurable and more powerfull), but the bad part is that it isn't as simple and easy to understand as docker-compose.
+I can execute it
+
+> docker-compose up
+
+Docker compose is pretty straightforward. But, what happens if our production environment is a cluster? docker-compose works fine in a single host. But it our production environment is a cluster, we´ll face problems (we need to esure manually things like hight avaiavility and things like that). Docker people tried to answer to this question with Docker Swarm. Basically Swarm is docker-compose within a cluster. It uses almost the same syntax than docker-compose in a single host. Looks good, ins't it? OK. Nobody uses it. Since Google created their Docker conainer orchestator (Kubernetes, aka K8s) it becames into the de-facto standard. The good thing about K8s is that it's much better than Swarm (more configurable and more powerfull), but the bad part is that it isn't as simple and easy to understand as docker-compose.
 
 Let's try to execute our proyect in K8s:
 
